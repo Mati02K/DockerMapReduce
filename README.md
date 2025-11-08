@@ -41,8 +41,8 @@ arguments or environment variables.
 
 ### 1. Clone the repository
 ```bash
-git clone <your-repo-url>
-cd <repo-directory>
+git clone https://github.com/Mati02K/DockerMapReduce.git
+cd DockerMapReduce
 ```
 
 ### 2. Build the images
