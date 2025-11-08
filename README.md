@@ -67,17 +67,17 @@ docker compose down
 Run with different number of workers:
 
 ```bash
-# 1 worker (default, slower, ~400s)
+# 1 worker (default, slower, ~114s)
 docker compose up
 
-# 2 workers (better, ~80s)
+# 2 workers (better, ~85s)
 WORKER_COUNT=2 docker compose up --scale docker-worker=2
 
-# 4 workers (medium, ~120s)
+# 4 workers (medium, ~54s)
 WORKER_COUNT=4 docker compose up --scale docker-worker=4
 
-# 8 workers (fantastic, ~60s)
-WORKER_COUNT=8 CHUNK_SIZE=32 NO_OF_PARALLEL_THREADS=4 WAIT_TIME=20 docker compose up --scale worker=8
+# 8 workers (fantastic, ~33s)
+WORKER_COUNT=8 CHUNK_SIZE=16 NO_OF_PARALLEL_THREADS=2 WAIT_TIME=20 docker compose up --scale worker=8
 ```
 
 ---
@@ -127,10 +127,7 @@ If a worker fails or times out, the task is automatically retried on another wor
 
 | Workers | Time | Notes |
 |---------|------|-------|
-| 1 | ~400s | Everything sequential |
-| 3 | ~120s | Good balance (default) |
-| 5 | ~80s | Diminishing returns start |
-| 10 | ~60s | Near optimal for this dataset |
+| 8 | ~33s | Proper Parallelism with core, separate memory but local txt reading |
 | Multicore | ~49s | Theoretical minimum (shared memory, no RPC) |
 
 ---
